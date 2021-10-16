@@ -1,0 +1,199 @@
+.faq {
+  background-color: #f9f9f9;
+
+  .section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    margin: 0 10px;
+
+    .section_heading__title {
+      font-size: 40px;
+      font-size: 2.5rem;
+      font-weight: 500;
+      color: #000;
+      text-transform: uppercase;
+      padding-bottom: 1.5625rem;
+    }
+  }
+  .askAQuestion__accardion {
+    background-image: -webkit-linear-gradient(0deg, #fabf36 0%, #eda04d 100%);
+    //   background-image: -ms-linear-gradient(0deg, #fabf36 0%, #eda04d 100%);
+    border-color: #fabf36;
+
+    margin-bottom: 5px;
+    border-radius: 23px !important;
+    border-radius: 1.4375rem !important;
+    border: 1px solid #d7d7d7;
+
+    .askAQuestion__accardion__title {
+      font-size: 18px;
+      font-size: 1.125rem;
+      color: white;
+      position: relative;
+      display: block;
+      padding: 5px 55px 5px 0px;
+    }
+
+    &::before {
+      content: none;
+    }
+  }
+
+  .accardion_last__btn {
+    background-color: #f0f0f0;
+    border: none;
+
+    &:focus {
+      background-color: white;
+    }
+  }
+
+  .accardion__items {
+    margin-bottom: 10px;
+    border-radius: 23px !important;
+    border-radius: 1.4375rem !important;
+    background-color: #fff;
+    border: 1px solid #d7d7d7;
+
+    &::before {
+      content: none;
+    }
+
+    .accardion__details {
+      pre {
+        font-family: inherit;
+        font-size: 0.9rem;
+        font-weight: inherit;
+      }
+      a {
+        font-size: 15px;
+      }
+    }
+  }
+
+  .faq__title {
+    font-size: 18px;
+    font-size: 1.125rem;
+    color: #3f3f3f;
+    position: relative;
+    display: block;
+    padding: 5px 55px 5px 0px;
+
+    &:hover {
+      color: #3f3f3f;
+    }
+  }
+
+  .accardion__form {
+    display: block;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 5px;
+
+    input {
+      display: block;
+      font-weight: 600;
+      width: 100%;
+      padding: 0.375rem 1rem;
+      font-family: inherit;
+      color: #000;
+      min-height: 50px;
+      background-color: #f0f0f0;
+      background-image: none;
+      background-clip: padding-box;
+      border: 1px solid transparent;
+      border-radius: 0.25rem;
+      -webkit-transition: all 0.1s ease-in;
+      transition: all 0.1s ease-in;
+      -webkit-appearance: none;
+      border-radius: 32px;
+      border-radius: 2rem;
+
+      &:focus {
+        outline: none;
+        background-color: #fff;
+      }
+    }
+
+    .accardion_last__btn {
+      margin-top: 15px;
+      min-height: 110px;
+      padding: 20px 22px;
+      padding: 1.25rem 1.375rem;
+      border-radius: 22px;
+      border-radius: 1.375rem;
+      resize: none;
+      outline: none;
+
+      &::before {
+        content: none;
+      }
+    }
+
+    button {
+      font-size: 16px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      text-transform: uppercase;
+      padding: 5px 25px;
+      padding: 0.3125rem 1.5625rem;
+      width: auto;
+      display: -webkit-inline-box;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      text-align: center;
+      text-decoration: none;
+      -ms-touch-action: manipulation;
+      touch-action: manipulation;
+      outline: none;
+      background-color: transparent;
+      background-image: none;
+      border: 1px solid transparent;
+      border-radius: 32px;
+      border-radius: 2rem;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-transition: all 0.175s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transition: all 0.175s cubic-bezier(0.25, 0.8, 0.25, 1);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      height: 50px;
+      color: #ffffff;
+      background-image: -webkit-linear-gradient(0deg, #45529e 0%, #33408a 100%);
+      margin-top: 15px;
+      margin-bottom: 13px;
+      transition: all 0.2s ease 0s;
+
+      &:hover {
+        box-shadow: 0px 5px 10px 3px rgba(34, 60, 80, 0.2);
+      }
+    }
+  }
+
+  @media screen and (max-width: 645px) {
+    .section_heading__title {
+      font-size: 30px !important;
+    }
+  }
+
+  @media screen and (max-width: 490px) {
+    .section_heading__title {
+      font-size: 25px !important;
+    }
+  }
+
+  @media screen and (max-width: 410px) {
+    .section_heading__title {
+      font-size: 19px !important;
+    }
+  }
+}

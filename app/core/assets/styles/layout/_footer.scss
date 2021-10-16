@@ -1,0 +1,122 @@
+.footer {
+  padding-top: 1.875rem;
+
+  .footer__nav {
+    row-gap: 2rem;
+
+    a:hover {
+      color: black;
+    }
+  }
+  .footer__title {
+    font-size: 24px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    color: #fff;
+    text-align: center;
+    line-height: 1.1;
+    text-transform: uppercase;
+    border-radius: 20px;
+    border-radius: 1.25rem;
+    padding: 22px 90px;
+    padding: 1.375rem 5.625rem;
+    border: 1px solid #fff;
+    box-shadow: 0 3px 3.8px 1.2px rgba(0, 0, 0, 0.24);
+  }
+  .footer__bottom {
+    background: #c5832d;
+    margin-top: 1.5625rem;
+    padding: 0.4375rem 0;
+    .footer__bottom-container {
+      display: flex;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      .footer__bottom-text {
+        font-size: 0.75rem;
+        color: #fff;
+      }
+    }
+  }
+  .footer__logo {
+    margin: 0 auto;
+  }
+  .mega-menu__title {
+    font-size: 1.0625rem;
+    font-weight: 500;
+    color: #fff;
+    line-height: 1;
+    text-transform: uppercase;
+    border-bottom: 1px solid #fff;
+    padding: 0 0 0.625rem 0;
+  }
+  .mega-menu__list {
+    margin: 0;
+    padding: 0;
+    text-indent: 0;
+    list-style: none;
+    list-style-position: outside;
+    margin-top: 10px;
+    margin-top: 0.625rem;
+  }
+  .mega-menu__link {
+    color: #fff;
+    display: block;
+  }
+  .footer__place {
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    .address-icon-img {
+      opacity: 0.65;
+    }
+
+    &:hover {
+      .address-icon-img {
+        opacity: 1;
+      }
+    }
+
+    .footer__place-icon {
+      max-width: 20%;
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 20%;
+      flex: 0 0 20%;
+    }
+    .footer__place-title {
+      color: #fff;
+    }
+  }
+  .footer__social {
+    justify-content: center;
+  }
+
+  .footer__btn a:hover {
+    box-shadow: 0px 5px 10px 3px rgba(34, 60, 80, 0.2);
+  }
+
+  @media (max-width: 991.98px) {
+    .footer__title {
+      font-size: 18px;
+      font-size: 1.125rem;
+      padding: 22px 50px;
+      padding: 1.375rem 3.125rem;
+    }
+
+    .footer__place {
+      margin-bottom: 35px;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .footer__title {
+      font-size: 17px;
+      font-size: 1.0625rem;
+      padding: 20px 15px;
+      padding: 1.25rem 0.9375rem;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+.stats {
+  padding: 20px 0 50px;
+  padding: 1.25rem 0 3.125rem;
+  background-color: white;
+  .stats__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+    img {
+      max-width: 100%;
+      margin: 0 auto;
+      justify-content: center;
+    }
+  }
+
+  .stats__text {
+    font-size: 18px;
+    font-size: 1.125rem;
+    font-weight: 300;
+    line-height: 1.1;
+    margin: 10px auto 0;
+    width: 180px;
+    text-align: center;
+  }
+}

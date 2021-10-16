@@ -7,7 +7,10 @@ import {
   ErrorFallbackProps,
   useQueryErrorResetBoundary,
 } from "blitz"
+import { Provider } from "react-redux"
 import LoginForm from "app/auth/components/LoginForm"
+import "../core/assets/styles/index.scss"
+import store from "app/redux/store"
 
 export default function App({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
@@ -17,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
       FallbackComponent={RootErrorFallback}
       onReset={useQueryErrorResetBoundary().reset}
     >
-      {getLayout(<Component {...pageProps} />)}
+      <Provider store={store}>{getLayout(<Component {...pageProps} />)}</Provider>
     </ErrorBoundary>
   )
 }

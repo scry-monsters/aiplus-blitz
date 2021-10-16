@@ -1,0 +1,182 @@
+.mega-menu {
+  background-image: -webkit-linear-gradient(0deg, #fabf36 0%, #eda04d 100%);
+  border-color: #fabf36;
+
+  .mega-menu__title {
+    row-gap: 2rem;
+    color: #ffffff;
+  }
+  .mega-menu__container {
+    margin: 0 auto;
+    text-align: left;
+    width: 910px;
+    vertical-align: middle;
+    padding: 50px 0;
+    padding: 3.125rem 0;
+
+    .mega-menu__col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  .mega-menu__logo {
+    background: url(../../images/logo_white-min.png) no-repeat;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    width: 122px;
+    height: 65px;
+  }
+  .mega-menu__list {
+    padding: 0;
+    color: #ffffff;
+  }
+
+  .mega-menu__title {
+    font-size: 17px;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    color: #fff;
+    line-height: 1;
+    text-transform: uppercase;
+    border-bottom: 1px solid #fff;
+    padding: 0 0 10px 0;
+    padding: 30px 0 0.625rem 0;
+  }
+
+  .mega-menu__link {
+    color: #fff;
+    display: block;
+  }
+
+  .mega-menu__link:hover,
+  .mega-menu__link:focus,
+  .mega-menu__link.-active {
+    color: #000;
+  }
+
+  .mega-menu__stats {
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    padding: 10px 0 5px;
+    padding: 0.625rem 0 0.3125rem;
+    margin-top: 80px;
+    margin-top: 5rem;
+  }
+
+  @media (max-width: 991.98px) {
+    .mega-menu__stats {
+      text-align: center;
+    }
+  }
+
+  .mega-menu__stats-title {
+    font-size: 35px;
+    font-size: 2.1875rem;
+    font-weight: 500;
+    color: #000;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+
+  @media (max-width: 991.98px) {
+    .mega-menu__stats-title {
+      font-size: 20px;
+      font-size: 1.25rem;
+    }
+  }
+
+  ul.mega-menu__list li {
+    list-style: none;
+    color: #ffffff;
+  }
+
+  .mega-menu__stats-title {
+    font-size: 35px;
+    font-size: 2.1875rem;
+    font-weight: 500;
+    color: #000;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+
+  @media (max-width: 991.98px) {
+    .mega-menu__container {
+      display: block;
+      width: auto;
+      margin: 0 10px;
+    }
+  }
+
+  @media (max-width: 991.98px) {
+    .mega-menu__stats-title {
+      font-size: 20px;
+      font-size: 1.25rem;
+    }
+  }
+
+  .mega-menu__phone:hover,
+  .mega-menu__phone:focus,
+  .mega-menu__phone.-active {
+    color: #000;
+  }
+  .mega-menu__phone {
+    font-size: 25px;
+    font-size: 1.5625rem;
+    color: #fff;
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+  .mega-menu__brands {
+    text-align: right;
+
+    @media (max-width: 991.98px) {
+      .mega-menu__brands {
+        text-align: center;
+        margin-top: 10px;
+      }
+    }
+
+    .mega-menu__brands-item {
+      margin-left: 10px;
+    }
+
+    .mega-menu__brands-item:hover,
+    .mega-menu__brands-item:focus {
+      opacity: 0.7;
+    }
+
+    @media (max-width: 991.98px) {
+      .mega-menu__brands-item {
+        margin: 0 5px;
+      }
+    }
+  }
+
+  .close {
+    font-size: 34px;
+    font-size: 2.125rem;
+    font-weight: bold;
+    position: absolute;
+    color: #000;
+    z-index: 5;
+    text-shadow: none;
+    opacity: 1;
+    top: 15px;
+    right: 15px;
+    float: none;
+    outline: none;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    background: none;
+    border: none;
+  }
+  .footer__social {
+    justify-content: center;
+  }
+}

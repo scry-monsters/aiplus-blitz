@@ -1,0 +1,40 @@
+.burger {
+  font-size: 0.9375rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  .burger__inner {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin-right: 8px;
+    justify-content: space-between;
+    min-height: 0.8rem;
+  }
+
+  .burger__item {
+    display: block;
+    width: 15px;
+    height: 2px;
+    background-color: #fff;
+    transition: 0.4s;
+    transform-origin: 100%;
+  }
+
+  .-lg {
+    width: 50px;
+    display: none;
+    .burger__inner {
+      margin-right: 0;
+    }
+    .burger__item {
+      width: 25px;
+      background-color: #000;
+    }
+  }
+}

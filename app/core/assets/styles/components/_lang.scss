@@ -1,0 +1,48 @@
+/*
+|--------------------------------------------------------------------------
+| lang
+|--------------------------------------------------------------------------
+*/
+.lang__link {
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  display: none;
+}
+
+.lang__link:hover,
+.lang__link:focus {
+  color: #fff;
+}
+
+.lang__link.-active {
+  display: block;
+}
+
+.lang__link.-ru {
+  box-shadow: 0 3px 3px 0 rgba(56, 75, 194, 0.27);
+  background: #4b57a5;
+}
+
+.lang__link.-ru:hover,
+.lang__link.-ru:focus {
+  background: #434e93;
+}
+
+.lang__link.-kz {
+  box-shadow: 0 3px 3px 0 rgba(255, 0, 0, 0.27);
+  background: #c8122e;
+}
+
+.lang__link.-kz:hover,
+.lang__link.-kz:focus {
+  background: #b11029;
+}

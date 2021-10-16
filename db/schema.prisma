@@ -1,28 +1,23 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
-// --------------------------------------
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
 
 model User {
-  id             Int      @id @default(autoincrement())
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id             Int       @id @default(autoincrement())
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
   name           String?
-  email          String   @unique
+  salt           String?   @default("")
+  email          String    @unique(map: "User.email_unique")
   hashedPassword String?
-  role           String   @default("USER")
-
-  tokens   Token[]
-  sessions Session[]
+  role           String    @default("USER")
+  sessions       Session[]
+  tokens         Token[]
 }
 
 model Session {
@@ -30,36 +25,229 @@ model Session {
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
   expiresAt          DateTime?
-  handle             String    @unique
+  handle             String    @unique(map: "Session.handle_unique")
   hashedSessionToken String?
   antiCSRFToken      String?
   publicData         String?
   privateData        String?
-
-  user   User? @relation(fields: [userId], references: [id])
-  userId Int?
+  userId             Int?
+  user               User?     @relation(fields: [userId], references: [id])
 }
 
 model Token {
-  id          Int      @id @default(autoincrement())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id          Int       @id @default(autoincrement())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   hashedToken String
-  type        String
-  // See note below about TokenType enum
-  // type        TokenType
+  type        TokenType
   expiresAt   DateTime
   sentTo      String
-
-  user   User @relation(fields: [userId], references: [id])
-  userId Int
+  userId      Int
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([hashedToken, type])
 }
 
-// NOTE: It's highly recommended to use an enum for the token type
-//       but enums only work in Postgres.
-//       See: https://blitzjs.com/docs/database-overview#switch-to-postgresql
-// enum TokenType {
-//   RESET_PASSWORD
-// }
+model City {
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(255)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Program   Program[]
+  schools   School[]
+  Student   Student[]
+  Teacher   Teacher[]
+}
+
+model Faq {
+  id            Int      @id @default(autoincrement())
+  titleRu       String   @db.VarChar(255)
+  titleKz       String   @db.VarChar(255)
+  descriptionRu String
+  descriptionKz String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Fact {
+  id          Int      @id @default(autoincrement())
+  titleRu     String   @db.VarChar(255)
+  titleKz     String   @db.VarChar(255)
+  orderNumber Int      @default(0)
+  image       String   @default("https://firebasestorage.googleapis.com/v0/b/chat-angular-e97bc.appspot.com/o/aiplus%2Fthumbs%2Fplaceholder-2_500x500.webp?alt=media")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model School {
+  id            Int       @id @default(autoincrement())
+  cityId        Int
+  titleEn       String    @db.VarChar(255)
+  titleRu       String    @db.VarChar(255)
+  titleKz       String    @db.VarChar(255)
+  descriptionEn String
+  descriptionRu String
+  descriptionKz String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  city          City      @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  programs      Program[]
+}
+
+model Program {
+  id                   Int              @id @default(autoincrement())
+  titleRu              String           @db.VarChar(255)
+  titleKz              String           @db.VarChar(255)
+  shortSchoolNameRu    String?          @db.VarChar(255)
+  shortSchoolNameKz    String?          @db.VarChar(255)
+  fullSchoolNameRu     String?          @db.VarChar(255)
+  fullSchoolNameKz     String?          @db.VarChar(255)
+  subTitleRu           String?          @db.VarChar(255)
+  subTitleKz           String?          @db.VarChar(255)
+  titleAtRootRu        String?          @db.VarChar(255)
+  titleAtRootKz        String?          @db.VarChar(255)
+  titleAtRootHoverRu   String?          @db.VarChar(255)
+  titleAtRootHoverKz   String?          @db.VarChar(255)
+  logo                 String
+  logoAtRoot           String?
+  logoAtListOfPrograms String?
+  orderNumber          Int              @default(0)
+  youtubeVideoId       String?          @db.VarChar(255)
+  videoTitleRu         String           @db.VarChar(255)
+  videoTitleKz         String           @db.VarChar(255)
+  factAboutProgramKz   String?
+  factAboutProgramRu   String?
+  titleWhyRu           String           @db.VarChar(255)
+  titleWhyKz           String           @db.VarChar(255)
+  textWhyKz            String?
+  textWhyRu            String?
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+  schoolId             Int?
+  cityId               Int
+  city                 City             @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  School               School?          @relation(fields: [schoolId], references: [id])
+  ProgramBenefits      ProgramBenefit[]
+  ProgramSubject       ProgramSubject[]
+  ProgramWhy           ProgramWhy[]
+  Student              Student[]
+}
+
+model Student {
+  id               Int      @id @default(autoincrement())
+  fioKz            String   @db.VarChar(255)
+  fioRu            String   @db.VarChar(255)
+  image            String?
+  beforeBallCount  String   @db.VarChar(255)
+  afterBallCount   String   @db.VarChar(255)
+  orderNum         Int      @default(0)
+  listOrderNum     Int      @default(0)
+  descriptionKz    String
+  descriptionRu    String
+  textKz           String
+  textRu           String
+  feedbackKz       String
+  feedbackRu       String
+  youtubeVideoId   String
+  sliderSubtitleKz String   @db.VarChar(255)
+  sliderSubtitleRu String   @db.VarChar(255)
+  year             DateTime
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  programId        Int
+  cityId           Int
+  city             City     @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  program          Program  @relation(fields: [programId], references: [id], onDelete: Cascade)
+}
+
+model Subject {
+  id             Int              @id @default(autoincrement())
+  titleRu        String           @db.VarChar(255)
+  titleKz        String           @db.VarChar(255)
+  descriptionRu  String?
+  descriptionKz  String?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  ProgramSubject ProgramSubject[]
+  Teacher        Teacher[]
+}
+
+model ProgramBenefit {
+  id          Int      @id @default(autoincrement())
+  titleKz     String?  @db.VarChar(255)
+  titleRu     String?  @db.VarChar(255)
+  orderNumber Int?     @default(0)
+  image       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  programId   Int
+  program     Program  @relation(fields: [programId], references: [id], onDelete: Cascade)
+}
+
+model ProgramWhy {
+  id          Int      @id @default(autoincrement())
+  textKz      String
+  textRu      String
+  orderNumber Int?     @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  programId   Int
+  program     Program  @relation(fields: [programId], references: [id], onDelete: Cascade)
+}
+
+model ProgramSubject {
+  id          Int     @id @default(autoincrement())
+  orderNumber Int     @default(0)
+  programId   Int
+  subjectId   Int
+  program     Program @relation(fields: [programId], references: [id], onDelete: Cascade)
+  subject     Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@unique([programId, subjectId])
+}
+
+model Teacher {
+  id             Int      @id @default(autoincrement())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  fioKz          String
+  fioRu          String
+  image          String
+  image2         String
+  orderNum       Int
+  sloganKz       String
+  sloganRu       String
+  subtitleKz     String
+  subtitleRu     String
+  textKz         String
+  textRu         String
+  urlName        String
+  youtubeVideoId String
+  cityId         Int
+  city           City     @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  subjectId      Int?
+  Subject        Subject? @relation(fields: [subjectId], references: [id])
+}
+
+model Feature {
+  id            Int      @id @default(autoincrement())
+  titleKz       String   @db.VarChar(255)
+  titleRu       String   @db.VarChar(255)
+  descriptionKz String
+  descriptionRu String
+  orderNum      Int?     @default(0)
+  image         String?  @default("https://firebasestorage.googleapis.com/v0/b/chat-angular-e97bc.appspot.com/o/aiplus%2Fthumbs%2Fplaceholder-2_500x500.webp?alt=media")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Project {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum TokenType {
+  RESET_PASSWORD
+}
