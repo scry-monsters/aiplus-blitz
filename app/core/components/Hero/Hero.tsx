@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import ReactInputMask from "react-input-mask"
 import { Link, Image } from "blitz"
 
@@ -15,13 +15,122 @@ import programm_img5 from "app/core/assets/images/programm_img/1555681988_progra
 import programm_img6 from "app/core/assets/images/programm_img/1555682225_programm_logo.png"
 import cat4 from "app/core/assets/images/content/cat-4.png"
 import mainpage2 from "app/core/assets/images/content/mainpage2.png"
+import { useIntl } from "react-intl"
+
+const FirstMotivations = ({ handleClick }) => {
+  return (
+    <div className="entry__cats main_entry__cats">
+      <div className="entry__cats-item">
+        <Link href="/programs/2">
+          <a className="entry__cats-link">
+            <Image width={50} height={50} src={programm_img1} alt="" />
+            <span>Ваша цель ПОСТУПИТЬ В НИШ</span>
+            <div className="entry__cats-overlay">
+              <Image width={50} height={50} src={programm_img1} alt="" />
+              <span>ПОСТУПИТЬ В НИШ</span>
+            </div>
+          </a>
+        </Link>
+      </div>
+      <div className="entry__cats-item">
+        <Link href="/programs/3">
+          <a className="entry__cats-link">
+            <Image width={50} height={50} src={programm_img2} alt="" />
+            <span>Ваша цель ПОСТУПИТЬ В РФМШ?</span>
+            <div className="entry__cats-overlay">
+              <Image width={50} height={50} src={programm_img2} alt="" />
+              <span>ПОСТУПИТЬ В РФМШ</span>
+            </div>
+          </a>
+        </Link>
+      </div>
+      <div className="entry__cats-item">
+        <Link href="/programs/4">
+          <a className="entry__cats-link">
+            <Image width={50} height={50} src={programm_img3} alt="" />
+            <span>Ваша цель ПОДГОТОВКА К ЕНТ</span>
+            <div className="entry__cats-overlay">
+              <Image width={50} height={50} src={programm_img3} alt="" />
+              <span>ПОДГОТОВКА К ЕНТ</span>
+            </div>
+          </a>
+        </Link>
+      </div>
+      <div className="entry__cats-item">
+        <a onClick={handleClick} style={{ cursor: "pointer" }} className="entry__cats-link">
+          <Image width={50} height={50} src={cat4} alt="" />
+          <span>Подготовка к другим целям</span>
+          <div className="entry__cats-overlay">
+            <Image width={50} height={50} src={cat4} alt="" />
+            <span>Другие цели</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  )
+}
+
+const OtherMotivations = ({ handleClick }) => {
+  return (
+    <div className="entry__cats other_entry__cats">
+      <div className="entry__cats-item">
+        <Link href="/programs/5">
+          <a className="entry__cats-link">
+            <Image width={50} height={50} src={programm_img4} alt="" />
+            <span>Ваша цель ПОСТУПИТЬ В 165 ЛИЦЕЙ</span>
+            <div className="entry__cats-overlay">
+              <Image width={50} height={50} src={programm_img4} alt="" />
+              <span>ПОСТУПИТЬ В 165 ЛИЦЕЙ</span>
+            </div>
+          </a>
+        </Link>
+      </div>
+      <div className="entry__cats-item">
+        <Link href="/programs/6">
+          <a className="entry__cats-link">
+            <Image width={50} height={50} src={programm_img5} alt="" />
+            <span>Ваша цель ПОСТУПИТЬ В БИЛ (КТЛ)</span>
+            <div className="entry__cats-overlay">
+              <Image width={50} height={50} src={programm_img5} alt="" />
+              <span>ПОСТУПИТЬ В БИЛ (КТЛ)</span>
+            </div>
+          </a>
+        </Link>
+      </div>
+      <div className="entry__cats-item">
+        <Link href="/programs/9">
+          <a className="entry__cats-link">
+            <Image width={50} height={50} src={programm_img6} alt="" />
+            <span>Ваша цель ПОСТУПИТЬ В 39 ЛИЦЕЙ</span>
+            <div className="entry__cats-overlay">
+              <Image width={50} height={50} src={programm_img6} alt="" />
+              <span>ПОСТУПИТЬ В 39 ЛИЦЕЙ</span>
+            </div>
+          </a>
+        </Link>
+      </div>
+      <div className="entry__cats-item">
+        <a onClick={handleClick} style={{ cursor: "pointer" }} className="entry__cats-link">
+          <Image width={50} height={50} src={cat4} alt="" />
+          <span>Скрыть другие лицей</span>
+          <div className="entry__cats-overlay">
+            <Image width={50} height={50} src={cat4} alt="" />
+            <span>Скрыть другие цели</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  )
+}
 
 function Hero() {
+  const intl = useIntl()
+  const [isOtherMotivationOpen, setIsOtherMotivationOpen] = useState<boolean>(false)
   return (
     <section className="entry bg-orange-gradient">
       <div className="container">
         <div className="row no-gutters">
-          <div className="col-lg-5">
+          <div className="col-lg-5 d-none d-lg-block">
             <Image
               src={mainpage2}
               // src={"https://firebasestorage.googleapis.com/v0/b/chat-angular-e97bc.appspot.com/o/images%2Fmainpage2.png?alt=media"}
@@ -33,116 +142,27 @@ function Hero() {
           </div>
           <div className="col-lg-7">
             <div className="entry__content">
-              <h1 className="entry__title">ЦЕНТР ПОДГОТОВКИ В НИШ, РФМШ, КТЛ</h1>
+              <h1 className="entry__title">
+                {intl.formatMessage({
+                  id: "hero.title",
+                  defaultMessage: "ЦЕНТР ПОДГОТОВКИ В НИШ, РФМШ, КТЛ",
+                  description: "Hero Title",
+                })}
+              </h1>
               <div className="entry__subtitle">
-                Рекордсмен по поступлению в НИШ , КТЛ, РФМШ 2020
+                {intl.formatMessage({
+                  id: "hero.subtitle",
+                  defaultMessage: "Рекордсмен по поступлению в НИШ , КТЛ, РФМШ 2020",
+                  description: "Hero Subtitle",
+                })}
               </div>
-              <div className="entry__cats main_entry__cats">
-                <div className="entry__cats-item">
-                  <a
-                    href="https://aiplus.kz/ru/programm/podgotovka-v-nish"
-                    className="entry__cats-link"
-                  >
-                    <Image width={50} height={50} src={programm_img1} alt="" />
-                    <span>Ваша цель ПОСТУПИТЬ В НИШ</span>
-                    <div className="entry__cats-overlay">
-                      <Image width={50} height={50} src={programm_img1} alt="" />
-                      <span>ПОСТУПИТЬ В НИШ</span>
-                    </div>
-                  </a>
-                </div>
-                <div className="entry__cats-item">
-                  <a
-                    href="https://aiplus.kz/ru/programm/podgotovka-v-rfmsh"
-                    className="entry__cats-link"
-                  >
-                    <Image width={50} height={50} src={programm_img2} alt="" />
-                    <span>Ваша цель ПОСТУПИТЬ В РФМШ?</span>
-                    <div className="entry__cats-overlay">
-                      <Image width={50} height={50} src={programm_img2} alt="" />
-                      <span>ПОСТУПИТЬ В РФМШ</span>
-                    </div>
-                  </a>
-                </div>
-                <div className="entry__cats-item">
-                  <a
-                    href="https://aiplus.kz/ru/programm/podgotovka-k-ent"
-                    className="entry__cats-link"
-                  >
-                    <Image width={50} height={50} src={programm_img3} alt="" />
-                    <span>Ваша цель ПОДГОТОВКА К ЕНТ</span>
-                    <div className="entry__cats-overlay">
-                      <Image width={50} height={50} src={programm_img3} alt="" />
-                      <span>ПОДГОТОВКА К ЕНТ</span>
-                    </div>
-                  </a>
-                </div>
-                <div className="entry__cats-item">
-                  <Link href="/">
-                    <a style={{ cursor: "pointer" }} className="entry__cats-link">
-                      <Image width={50} height={50} src={cat4} alt="" />
-                      <span>Подготовка к другим целям</span>
-                      <div className="entry__cats-overlay">
-                        <Image width={50} height={50} src={cat4} alt="" />
-                        <span>Другие цели</span>
-                      </div>
-                    </a>
-                  </Link>
-                </div>
-              </div>
-              <div className="entry__cats other_entry__cats" style={{ display: "none" }}>
-                <div className="entry__cats-item">
-                  <a
-                    href="https://aiplus.kz/ru/programm/podgotovka-v-165-litsey"
-                    className="entry__cats-link"
-                  >
-                    <Image width={50} height={50} src={programm_img4} alt="" />
-                    <span>Ваша цель ПОСТУПИТЬ В 165 ЛИЦЕЙ</span>
-                    <div className="entry__cats-overlay">
-                      <Image width={50} height={50} src={programm_img4} alt="" />
-                      <span>ПОСТУПИТЬ В 165 ЛИЦЕЙ</span>
-                    </div>
-                  </a>
-                </div>
-                <div className="entry__cats-item">
-                  <a
-                    href="https://aiplus.kz/ru/programm/podgotovka-v-bil-ktl"
-                    className="entry__cats-link"
-                  >
-                    <Image width={50} height={50} src={programm_img5} alt="" />
-                    <span>Ваша цель ПОСТУПИТЬ В БИЛ (КТЛ)</span>
-                    <div className="entry__cats-overlay">
-                      <Image width={50} height={50} src={programm_img5} alt="" />
-                      <span>ПОСТУПИТЬ В БИЛ (КТЛ)</span>
-                    </div>
-                  </a>
-                </div>
-                <div className="entry__cats-item">
-                  <a
-                    href="https://aiplus.kz/ru/programm/postupit-v-39-litsey"
-                    className="entry__cats-link"
-                  >
-                    <Image width={50} height={50} src={programm_img6} alt="" />
-                    <span>Ваша цель ПОСТУПИТЬ В 39 ЛИЦЕЙ</span>
-                    <div className="entry__cats-overlay">
-                      <Image width={50} height={50} src={programm_img6} alt="" />
-                      <span>ПОСТУПИТЬ В 39 ЛИЦЕЙ</span>
-                    </div>
-                  </a>
-                </div>
-                <div className="entry__cats-item">
-                  <Link href="/">
-                    <a style={{ cursor: "pointer" }} className="entry__cats-link">
-                      <Image width={50} height={50} src={cat4} alt="" />
-                      <span>Скрыть другие лицей</span>
-                      <div className="entry__cats-overlay">
-                        <Image width={50} height={50} src={cat4} alt="" />
-                        <span>Скрыть другие цели</span>
-                      </div>
-                    </a>
-                  </Link>
-                </div>
-              </div>
+
+              {isOtherMotivationOpen ? (
+                <OtherMotivations handleClick={() => setIsOtherMotivationOpen(false)} />
+              ) : (
+                <FirstMotivations handleClick={() => setIsOtherMotivationOpen(true)} />
+              )}
+
               <form
                 className="row"
                 data-gutter={15}

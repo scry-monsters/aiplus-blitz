@@ -7,7 +7,7 @@ import getTeachers from "app/teachers/queries/getTeachers"
 const ITEMS_PER_PAGE = 10
 
 function TeamsSection() {
-  const [{ teachers, count }] = useQuery(getTeachers, {})
+  const [{ teachers, count }] = useQuery(getTeachers, { skip: 0 })
 
   return (
     <section className="py-5">

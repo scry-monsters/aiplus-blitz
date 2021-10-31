@@ -26,14 +26,14 @@ const StudentsCarousel = ({ students, count = 0, fetchNextPage }: Props) => {
 
   const onSelect = useCallback(() => {
     if (!embla) return
-    const lastSlideInView = embla.slidesInView(true).at(-1)
+    const lastSlideInView = embla.slidesInView()[embla.slidesInView().length - 1]
     if (lastSlideInView !== undefined && lastSlideInView + 1 >= students.length - 3) {
       fetchNextPage()
     }
     // setPrevBtnEnabled(embla.canScrollPrev());
     // setNextBtnEnabled(embla.canScrollNext());
     setCurrentSlide(() => {
-      const a = embla.slidesInView(true).at(-1)
+      const a = embla.slidesInView()[embla.slidesInView().length - 1]
       return a !== undefined ? a + 1 : 0
     })
   }, [embla, fetchNextPage, students.length])

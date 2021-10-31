@@ -5,6 +5,7 @@
 @import "./components/section";
 @import "./components/page";
 @import "./components/gradients";
+@import "./components/socials";
 @import "./layout/layout";
 @import "./def";
 @import "./components/slider";
@@ -12,3 +13,6 @@
 @import "~@fontsource/roboto/400.css";
 @import "~@fontsource/roboto/500.css";
 @import "~@fontsource/roboto/700.css";
+
+@import "./pages/blog.scss";
+@import "./pages/faq.scss";

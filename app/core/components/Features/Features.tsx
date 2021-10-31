@@ -6,16 +6,16 @@ import classes from "./Features.module.scss"
 import getFeatures from "app/features/queries/getFeatures"
 
 function Features() {
-  const [{ features }] = useQuery(getFeatures, {})
+  const [{ features }] = useQuery(getFeatures, { skip: 0 })
   const [selectedItem, setSelectedItem] = React.useState<null | any>(null)
 
   useEffect(() => {
     setSelectedItem(features[0] || null)
   }, [features])
 
-  useEffect(() => {
-    console.log(features)
-  }, [features])
+  // useEffect(() => {
+  //   // console.log(features)
+  // }, [features])
 
   const handleClick = (item) => () => {
     setSelectedItem(item)

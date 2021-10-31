@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native"]
 }
 
 datasource db {
@@ -10,7 +11,7 @@ datasource db {
 model User {
   id             Int       @id @default(autoincrement())
   createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  updatedAt      DateTime  @default(now()) @updatedAt
   name           String?
   salt           String?   @default("")
   email          String    @unique(map: "User.email_unique")
@@ -20,39 +21,11 @@ model User {
   tokens         Token[]
 }
 
-model Session {
-  id                 Int       @id @default(autoincrement())
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
-  expiresAt          DateTime?
-  handle             String    @unique(map: "Session.handle_unique")
-  hashedSessionToken String?
-  antiCSRFToken      String?
-  publicData         String?
-  privateData        String?
-  userId             Int?
-  user               User?     @relation(fields: [userId], references: [id])
-}
-
-model Token {
-  id          Int       @id @default(autoincrement())
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  hashedToken String
-  type        TokenType
-  expiresAt   DateTime
-  sentTo      String
-  userId      Int
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([hashedToken, type])
-}
-
 model City {
   id        Int       @id @default(autoincrement())
   name      String    @db.VarChar(255)
   createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  updatedAt DateTime  @default(now()) @updatedAt
   Program   Program[]
   schools   School[]
   Student   Student[]
@@ -66,7 +39,7 @@ model Faq {
   descriptionRu String
   descriptionKz String
   createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  updatedAt     DateTime @default(now()) @updatedAt
 }
 
 model Fact {
@@ -76,7 +49,7 @@ model Fact {
   orderNumber Int      @default(0)
   image       String   @default("https://firebasestorage.googleapis.com/v0/b/chat-angular-e97bc.appspot.com/o/aiplus%2Fthumbs%2Fplaceholder-2_500x500.webp?alt=media")
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  updatedAt   DateTime @default(now()) @updatedAt
 }
 
 model School {
@@ -89,7 +62,7 @@ model School {
   descriptionRu String
   descriptionKz String
   createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  updatedAt     DateTime  @default(now()) @updatedAt
   city          City      @relation(fields: [cityId], references: [id], onDelete: Cascade)
   programs      Program[]
 }
@@ -113,8 +86,8 @@ model Program {
   logoAtListOfPrograms String?
   orderNumber          Int              @default(0)
   youtubeVideoId       String?          @db.VarChar(255)
-  videoTitleRu         String           @db.VarChar(255)
-  videoTitleKz         String           @db.VarChar(255)
+  videoTitleRu         String?          @db.VarChar(255)
+  videoTitleKz         String?          @db.VarChar(255)
   factAboutProgramKz   String?
   factAboutProgramRu   String?
   titleWhyRu           String           @db.VarChar(255)
@@ -122,7 +95,7 @@ model Program {
   textWhyKz            String?
   textWhyRu            String?
   createdAt            DateTime         @default(now())
-  updatedAt            DateTime         @updatedAt
+  updatedAt            DateTime         @default(now()) @updatedAt
   schoolId             Int?
   cityId               Int
   city                 City             @relation(fields: [cityId], references: [id], onDelete: Cascade)
@@ -153,7 +126,7 @@ model Student {
   sliderSubtitleRu String   @db.VarChar(255)
   year             DateTime
   createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  updatedAt        DateTime @default(now()) @updatedAt
   programId        Int
   cityId           Int
   city             City     @relation(fields: [cityId], references: [id], onDelete: Cascade)
@@ -167,9 +140,9 @@ model Subject {
   descriptionRu  String?
   descriptionKz  String?
   createdAt      DateTime         @default(now())
-  updatedAt      DateTime         @updatedAt
+  updatedAt      DateTime         @default(now()) @updatedAt
   ProgramSubject ProgramSubject[]
-  Teacher        Teacher[]
+  teachers       Teacher[]
 }
 
 model ProgramBenefit {
@@ -179,7 +152,7 @@ model ProgramBenefit {
   orderNumber Int?     @default(0)
   image       String?
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  updatedAt   DateTime @default(now()) @updatedAt
   programId   Int
   program     Program  @relation(fields: [programId], references: [id], onDelete: Cascade)
 }
@@ -190,43 +163,45 @@ model ProgramWhy {
   textRu      String
   orderNumber Int?     @default(0)
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  updatedAt   DateTime @default(now()) @updatedAt
   programId   Int
   program     Program  @relation(fields: [programId], references: [id], onDelete: Cascade)
 }
 
 model ProgramSubject {
-  id          Int     @id @default(autoincrement())
-  orderNumber Int     @default(0)
+  id          Int      @id @default(autoincrement())
+  orderNumber Int      @default(0)
   programId   Int
   subjectId   Int
-  program     Program @relation(fields: [programId], references: [id], onDelete: Cascade)
-  subject     Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  program     Program  @relation(fields: [programId], references: [id], onDelete: Cascade)
+  subject     Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
 
-  @@unique([programId, subjectId])
+  @@unique([programId, subjectId], name: "ProgramSubject_programId_subjectId_key")
 }
 
 model Teacher {
   id             Int      @id @default(autoincrement())
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
   fioKz          String
   fioRu          String
-  image          String
-  image2         String
-  orderNum       Int
   sloganKz       String
   sloganRu       String
-  subtitleKz     String
-  subtitleRu     String
+  image          String
+  image2         String
+  youtubeVideoId String
+  orderNum       Int
+  urlName        String
   textKz         String
   textRu         String
-  urlName        String
-  youtubeVideoId String
+  subtitleKz     String
+  subtitleRu     String
   cityId         Int
-  city           City     @relation(fields: [cityId], references: [id], onDelete: Cascade)
   subjectId      Int?
-  Subject        Subject? @relation(fields: [subjectId], references: [id])
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now()) @updatedAt
+  city           City     @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  subject        Subject? @relation(fields: [subjectId], references: [id])
 }
 
 model Feature {
@@ -238,14 +213,89 @@ model Feature {
   orderNum      Int?     @default(0)
   image         String?  @default("https://firebasestorage.googleapis.com/v0/b/chat-angular-e97bc.appspot.com/o/aiplus%2Fthumbs%2Fplaceholder-2_500x500.webp?alt=media")
   createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  updatedAt     DateTime @default(now()) @updatedAt
 }
 
 model Project {
   id        Int      @id @default(autoincrement())
   name      String   @db.VarChar(255)
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
+}
+
+model Session {
+  id                 Int       @id @default(autoincrement())
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @default(now())
+  expiresAt          DateTime?
+  handle             String    @unique(map: "Session.handle_unique")
+  hashedSessionToken String?
+  antiCSRFToken      String?
+  publicData         String?
+  privateData        String?
+  userId             Int?
+  user               User?     @relation(fields: [userId], references: [id])
+}
+
+model Token {
+  id          Int       @id @default(autoincrement())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+  hashedToken String
+  type        TokenType
+  expiresAt   DateTime
+  sentTo      String
+  userId      Int
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([hashedToken, type], name: "Token_hashedToken_type_key")
+}
+
+model MenuItem {
+  id          Int        @id @default(autoincrement())
+  titleRu     String
+  titleKz     String
+  link        String
+  orderNumber Int
+  parentId    Int?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @default(now()) @updatedAt
+  parent      MenuItem?  @relation("MenuItemToMenuItem", fields: [parentId], references: [id])
+  children    MenuItem[] @relation("MenuItemToMenuItem")
+}
+
+model Blog {
+  id                Int                 @id @default(autoincrement())
+  titleRu           String
+  titleKz           String
+  textRu            String
+  textKz            String
+  image             String
+  descriptionKz     String
+  descriptionRu     String
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @default(now()) @updatedAt
+  BlogAndTagForBlog BlogAndTagForBlog[]
+}
+
+model TagForBlog {
+  id                Int                 @id @default(autoincrement())
+  orderNum          Int?                @default(0)
+  titleRu           String
+  titleKz           String
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @default(now()) @updatedAt
+  BlogAndTagForBlog BlogAndTagForBlog[]
+}
+
+model BlogAndTagForBlog {
+  id           Int         @id @default(autoincrement())
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @default(now()) @updatedAt
+  blogId       Int?
+  tagForBlogId Int?
+  blog         Blog?       @relation(fields: [blogId], references: [id])
+  tag          TagForBlog? @relation(fields: [tagForBlogId], references: [id])
 }
 
 enum TokenType {

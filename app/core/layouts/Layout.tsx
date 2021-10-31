@@ -1,7 +1,8 @@
 import { ReactNode, Suspense } from "react"
-import { Head } from "blitz"
+import { Head, useQuery } from "blitz"
 import Footer from "../components/Footer/Footer"
 import Header from "../components/Header/Header"
+import getMenuItems from "app/menu-items/queries/getMenuItems"
 
 type LayoutProps = {
   title?: string
@@ -9,6 +10,17 @@ type LayoutProps = {
 }
 
 const Layout = ({ title, children }: LayoutProps) => {
+  const [{ menuItems = [] }] = useQuery(getMenuItems, {
+    orderBy: {
+      orderNumber: "asc",
+    },
+    where: {
+      parentId: {
+        equals: null,
+      },
+    },
+  })
+  // const menuItems = [];
   return (
     <>
       <Head>
@@ -18,11 +30,11 @@ const Layout = ({ title, children }: LayoutProps) => {
 
       <div className="layout">
         <div className="layout__wrapper">
-          <Header />
+          <Header menuItems={menuItems} />
           <main role="main" className="layout__main">
             <Suspense fallback={<div></div>}>{children}</Suspense>
           </main>
-          <Footer />
+          <Footer menuItems={menuItems} />
         </div>
       </div>
     </>

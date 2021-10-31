@@ -15,7 +15,7 @@ const FactsSection = () => {
         <div className="container mt-5">
           <div className="row" vertical-gutter="30">
             {facts.map((item) => (
-              <div key={item.id} className="col-md-4 col-6">
+              <div key={item.id} className="col-md-4 col-12">
                 <div className={classes.stats__item}>
                   <Image width={80} height={80} src={item.image} alt="" />
                   <div className={classes.stats__text}>{item.titleRu}</div>

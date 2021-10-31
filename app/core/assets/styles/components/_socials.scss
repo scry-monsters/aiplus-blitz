@@ -1,0 +1,26 @@
+.social {
+  .social__item {
+    i.fab {
+      aspect-ratio: 1;
+      width: 23px;
+      display: block;
+      background-repeat: no-repeat;
+      background-size: contain;
+      filter: invert(1);
+      transition: 0.3s;
+      &:hover {
+        filter: none;
+      }
+    }
+
+    .fa-facebook-f {
+      background-image: url("../../images/icons8-facebook-f.svg");
+    }
+    .fa-instagram {
+      background-image: url("../../images/icons8-instagram.svg");
+    }
+    .fa-youtube {
+      background-image: url("../../images/icons8-youtube-logo.svg");
+    }
+  }
+}

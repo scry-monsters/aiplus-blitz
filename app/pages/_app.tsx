@@ -6,21 +6,40 @@ import {
   AuthorizationError,
   ErrorFallbackProps,
   useQueryErrorResetBoundary,
+  useRouter,
 } from "blitz"
+import { Suspense, useMemo } from "react"
+import store from "app/redux/store"
 import { Provider } from "react-redux"
 import LoginForm from "app/auth/components/LoginForm"
+import { IntlProvider } from "react-intl"
 import "../core/assets/styles/index.scss"
-import store from "app/redux/store"
+import Kazakh from "app/content/compiled-locales/kz.json"
+import Russian from "app/content/compiled-locales/ru.json"
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
+  const { locale = "ru" } = useRouter()
+
+  const messages = useMemo(() => {
+    switch (locale) {
+      case "kz":
+        return Kazakh
+      default:
+        return Russian
+    }
+  }, [locale])
 
   return (
     <ErrorBoundary
       FallbackComponent={RootErrorFallback}
       onReset={useQueryErrorResetBoundary().reset}
     >
-      <Provider store={store}>{getLayout(<Component {...pageProps} />)}</Provider>
+      <IntlProvider locale={locale} defaultLocale="ru" messages={messages}>
+        <Provider store={store}>
+          <Suspense fallback={<div></div>}>{getLayout(<Component {...pageProps} />)}</Suspense>
+        </Provider>
+      </IntlProvider>
     </ErrorBoundary>
   )
 }
@@ -41,3 +60,5 @@ function RootErrorFallback({ error, resetErrorBoundary }: ErrorFallbackProps) {
     )
   }
 }
+
+export default App

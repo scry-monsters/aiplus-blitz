@@ -63,6 +63,7 @@ const styles = css`
   .testimons .testimons-video__container .testimons__videos {
     width: 100%;
     display: flex;
+    gap: 1rem;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -71,6 +72,8 @@ const styles = css`
     margin: 0 auto 3rem;
   }
   .testimons .testimons__btns {
+    margin-top: 2rem;
+    gap: 1rem;
     max-width: 420px;
     display: flex;
     flex-direction: row;

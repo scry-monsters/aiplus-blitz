@@ -14,7 +14,7 @@ import getFaqs from "app/faqs/queries/getFaqs"
 function Faq() {
   const [phoneNumber, setPhoneNumber] = useState("")
   const [question, setQuestion] = useState("")
-  const [{ faqs }, { isLoading, error }] = useQuery(getFaqs, {})
+  const [{ faqs }, { isLoading, error }] = useQuery(getFaqs, { skip: 0 })
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -42,10 +42,14 @@ function Faq() {
 
   return (
     <>
-      <div className={classes.faq}>
+      <div className={classNames(classes.faq, "faq-wrapper")}>
         <div className={"container"}>
           <div className={classes.section}>
-            <div className={classes.section_heading__title}>Часто задаваемые вопросы</div>
+            <div
+              className={classNames(classes.section_heading__title, "faq-section_heading__title")}
+            >
+              Часто задаваемые вопросы
+            </div>
             {!isLoading &&
               !error &&
               faqs.map((item) => (

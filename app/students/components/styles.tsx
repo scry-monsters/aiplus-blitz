@@ -101,13 +101,13 @@ const styles = css.global`
     .students-page .page__header {
       padding: 125px 0 90px;
       padding: 7.8125rem 0 5.625rem;
+      min-height: auto;
     }
   }
   @media (max-width: 991.98px) {
     .students-page .page__header {
       padding: 130px 0 100px;
       padding: 8.125rem 0 6.25rem;
-      min-height: auto;
     }
   }
   .students-page .bg-orange {
@@ -171,15 +171,9 @@ const styles = css.global`
     padding-right: 15px;
     padding-left: 15px;
   }
-  @media (max-width: 991px) {
-    .students-page .page__content .menu:first-child,
-    .students-page .page__content .students-list:first-child {
-      margin-top: 300px;
-    }
-  }
   @media (max-width: 768px) {
     .students-page .page__content .menu:first-child {
-      margin-top: 300px;
+      margin-top: 200px;
     }
     .students-page .page__content .students-list:first-child {
       margin-top: 1rem;
@@ -199,6 +193,7 @@ const styles = css.global`
     background-color: #fff;
     border: 1px solid #fabf36;
     transition: 0.3s;
+    cursor: pointer;
   }
   .students-page .page__content .menu__item .menu__link-onfocus {
     font-size: 0.875rem;
@@ -247,19 +242,6 @@ const styles = css.global`
   }
   .students-page .page__content .menu__item .menu__sub .menu__subitem .menu__sublink:hover {
     color: #989898;
-  }
-  .students-page .page__content .menu__item ul {
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
-  }
-  .students-page .page__content .menu__item ul li {
-    display: list-item;
-    text-align: -webkit-match-parent;
   }
   .students-page .page__content .students-list {
     margin: 0;
@@ -563,15 +545,6 @@ const styles = css.global`
       padding: 30px 15px;
       padding: 1.875rem 0.9375rem;
     }
-  }
-  .students-page .page__content ul {
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
   }
   @media (min-width: 576px) {
     .students-page .container {

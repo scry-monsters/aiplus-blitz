@@ -61,6 +61,8 @@
 
 .entry__pattern {
   background: url(../../images/general/pattern.png) repeat fixed;
+  background-position: initial !important;
+  background-size: 70%;
   position: absolute;
   top: 0;
   left: 0;

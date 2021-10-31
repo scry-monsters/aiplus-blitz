@@ -2,13 +2,20 @@ import React from "react"
 import Burger from "app/core/components/Burger/Burger"
 import NavigationMenu from "app/core/components/NavigationMenu/NavigationMenu"
 import Navbar from "./Navbar"
+import { MenuItem } from "db"
 
-function Header() {
+interface Props {
+  menuItems: (MenuItem & {
+    children: MenuItem[]
+  })[]
+}
+
+function Header({ menuItems }: Props) {
   return (
     <header className="header">
-      <div className="container">
+      <div className="container d-none d-lg-block">
         <div className="header__top px-5">
-          <NavigationMenu buttonProps={{ color: "#FFF" }} menuButton={Burger}>
+          <NavigationMenu menuItems={menuItems} buttonProps={{ color: "#FFF" }} menuButton={Burger}>
             Всё меню
           </NavigationMenu>
           <div className="header__info">
@@ -50,7 +57,7 @@ function Header() {
           </div>
         </div>
       </div>
-      <Navbar />
+      <Navbar menuItems={menuItems} />
     </header>
   )
 }

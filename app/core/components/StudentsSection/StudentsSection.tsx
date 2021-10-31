@@ -13,7 +13,7 @@ function StudentsSection() {
       getNextPageParam: (lastPage) => lastPage.nextPage,
     })
   const students = results ? results.map(({ students }) => students).flat() : []
-  const count = (results && results.at(-1)?.count) || 0
+  const count = (results && results[results.length - 1]?.count) || 0
 
   return (
     <section className="bg-orange-gradient py-5">

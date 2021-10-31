@@ -1,9 +1,13 @@
 import React, { memo } from "react"
-import { Link } from "blitz"
-import StudentsListItem from "./StudentsListItem"
+import { Link, Image } from "blitz"
+// import StudentsListItem from "./StudentsListItem"
 import StudentsMenuItem from "./StudentsMenuItem"
 import styles from "./styles"
 import { Student } from "db"
+
+import wave1 from "app/core/assets/images/general/wave1.png"
+import wave2 from "app/core/assets/images/general/wave2.png"
+import glow1 from "app/core/assets/images/general/glow-1.png"
 
 interface IStudentsMenuItem {
   Student: Student[]
@@ -49,12 +53,15 @@ const StudentsPage: React.FC<Props> = ({ menuItems = [], breadcrumbs = [], title
           <h1 className="page__header-title">{title}</h1>
         </div>
         <div className="waves">
-          <div className="waves__item">
-            <img src="https://aiplus.kz/static/img/general/wave1.png" alt="" />
+          <div className="waves__item" style={{ height: "200px" }}>
+            <Image layout="fill" src={wave1} alt="wave 2" />
           </div>
-          <div className="waves__item">
-            <img src="https://aiplus.kz/static/img/general/wave2.png" alt="" />
+          <div className="waves__item" style={{ height: "300px" }}>
+            <Image layout="fill" src={wave2} alt="wave 1" />
           </div>
+        </div>
+        <div className="glow">
+          <Image layout="fill" src={glow1} alt="glow" />
         </div>
       </div>
       <div className="page__content">

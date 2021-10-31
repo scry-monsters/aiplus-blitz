@@ -16,35 +16,36 @@ const Reviews = lazy(() => import("app/core/components/Reviews/Reviews"))
 
 const Home: BlitzPage = () => {
   return (
-    <div>
-      <Hero />
-      <Suspense fallback={<div></div>}>
-        <FactsSection />
-      </Suspense>
-      <Suspense fallback={<div></div>}>
-        <Features />
-      </Suspense>
-      <Suspense fallback={<div></div>}>
-        <StudentsSection />
-      </Suspense>
-      <Suspense fallback={<div></div>}>
-        <Consultation />
-      </Suspense>
-      <Suspense fallback={<div></div>}>
-        <TeamsSection />
-      </Suspense>
-      <Suspense fallback={<div></div>}>
-        <Faq />
-      </Suspense>
-      <Suspense fallback={<div></div>}>
-        <Reviews />
-      </Suspense>
-    </div>
+    <Layout title="Home">
+      <div>
+        <Hero />
+        <Suspense fallback={<div></div>}>
+          <FactsSection />
+        </Suspense>
+        <Suspense fallback={<div></div>}>
+          <Features />
+        </Suspense>
+        <Suspense fallback={<div></div>}>
+          <StudentsSection />
+        </Suspense>
+        <Suspense fallback={<div></div>}>
+          <Consultation />
+        </Suspense>
+        <Suspense fallback={<div></div>}>
+          <TeamsSection />
+        </Suspense>
+        <Suspense fallback={<div></div>}>
+          <Faq />
+        </Suspense>
+        <Suspense fallback={<div></div>}>
+          <Reviews />
+        </Suspense>
+      </div>
+    </Layout>
   )
 }
 
 Home.suppressFirstRenderFlicker = true
-Home.getLayout = (page) => <Layout title="Home">{page}</Layout>
 
 export default Home
 

@@ -28,7 +28,7 @@ const StudentsCarousel = ({ teachers, count = 0 }: Props) => {
     // setPrevBtnEnabled(embla.canScrollPrev());
     // setNextBtnEnabled(embla.canScrollNext());
     setCurrentSlide(() => {
-      const a = embla.slidesInView(true).at(-1)
+      const a = embla.slidesInView(true)[embla.slidesInView(true).length - 1]
       return a !== undefined ? a + 1 : 0
     })
   }, [embla])

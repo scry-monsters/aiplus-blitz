@@ -4,140 +4,18 @@ import addressIcon1 from "app/core/assets/images/1630661742_address_active_icon_
 import addressIcon2 from "app/core/assets/images/1630661788_address_active_icon_img.png"
 import addressIcon3 from "app/core/assets/images/1630661892_address_active_icon_img.png"
 import addressIcon4 from "app/core/assets/images/1630661916_address_active_icon_img.png"
-import { NavItem } from "../Header/Nav"
+import { MenuItem } from "db"
+import useLocalizedProp from "app/core/hooks/useLocalizedProp"
+import { useAppSelector } from "app/redux/hooks"
 
-const navItems: NavItem[] = [
-  {
-    id: "programs",
-    title: "Программы",
-    link: "/programs",
-    children: [
-      {
-        id: 0,
-        title: "ПОДГОТОВКА В НИШ",
-        link: "/",
-      },
-      {
-        id: 1,
-        title: "ПОДГОТОВКА В РФМШ",
-        link: "/",
-      },
-      {
-        id: 2,
-        title: "ПОДГОТОВКА В ЕНТ",
-        link: "/",
-      },
-      {
-        id: 3,
-        title: "ПОДГОТОВКА В БИЛ (КТЛ)",
-        link: "/",
-      },
-      {
-        id: 4,
-        title: "ПОДГОТОВКА В СПЕЦ ЛИЦЕИ",
-        link: "/",
-      },
-      {
-        id: 5,
-        title: "Онлайн обучение",
-        link: "/",
-      },
-    ],
-  },
-  {
-    id: "teachers",
-    title: "Тренеры",
-    link: "/teachers",
-    children: [
-      {
-        id: 0,
-        title: "Кафедра математики",
-        link: "/",
-      },
-      {
-        id: 1,
-        title: "Кафедра русского языка",
-        link: "/",
-      },
-      {
-        id: 2,
-        title: "Кафедра казахского языка",
-        link: "/",
-      },
-      {
-        id: 3,
-        title: "Кафедра английского языка",
-        link: "/",
-      },
-      {
-        id: 4,
-        title: "Кафедра физики",
-        link: "/",
-      },
-    ],
-  },
-  {
-    id: "students",
-    title: "Гордость центра",
-    link: "/students",
-    children: [
-      {
-        id: 0,
-        title: "Поступившие в РФМШ",
-        link: "/",
-      },
-      {
-        id: 1,
-        title: "Поступившие в НИШ",
-        link: "/",
-      },
-      {
-        id: 2,
-        title: "Поступившие в БИЛ (КТЛ)",
-        link: "/",
-      },
-      {
-        id: 3,
-        title: "Успешно сдали ЕНТ",
-        link: "/",
-      },
-    ],
-  },
-  {
-    id: "faq",
-    title: "Вопросы",
-    link: "/faq",
-    children: [
-      {
-        id: 0,
-        title: "FAQ",
-        link: "/",
-      },
-      {
-        id: 1,
-        title: "Задать вопрос",
-        link: "/",
-      },
-    ],
-  },
-  {
-    id: "blog",
-    title: "Блог",
-    link: "/blog",
-  },
-  {
-    id: "contacts",
-    title: "Контакты",
-    link: "/contacts",
-  },
-  {
-    id: "rewiews",
-    title: "Rewiews",
-    link: "/rewiews",
-  },
-]
+interface Props {
+  menuItems: (MenuItem & {
+    children: MenuItem[]
+  })[]
+}
 
-function Footer() {
+function Footer({ menuItems }: Props) {
+  const l = useLocalizedProp()
   return (
     <footer className="footer bg-orange-gradient">
       <div className="container">
@@ -145,12 +23,12 @@ function Footer() {
           Aiplus
         </a>
         <div className="footer__nav row my-4">
-          {navItems.map((item) => (
+          {menuItems.map((item) => (
             <div key={item.id} className="col-lg-6 col-xl-3">
               <div className="mega-menu__col">
                 <div className="mega-menu__title">
                   <Link href={item.link}>
-                    <a className="mega-menu__link">{item.title}</a>
+                    <a className="mega-menu__link">{l(item, "title")}</a>
                   </Link>
                 </div>
                 <ul className="mega-menu__list">
@@ -158,7 +36,7 @@ function Footer() {
                     item.children.map((child) => (
                       <li key={child.id}>
                         <Link href={child.link} key={child.id}>
-                          <a className="mega-menu__link">{child.title}</a>
+                          <a className="mega-menu__link">{l(child, "title")}</a>
                         </Link>
                       </li>
                     ))}

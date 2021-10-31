@@ -149,24 +149,10 @@
     height: 100%;
     .navigation__item {
       position: static;
-    }
-  }
-  .navigation__link {
-    font-weight: 500;
-    color: #818080;
-    position: relative;
-    line-height: 1;
-    text-transform: uppercase;
-    transition: 0.3s;
-    padding: 1.9375rem 0.9375rem 1.75rem;
-    outline: none;
-    display: block;
-
-    &:hover,
-    &:focus,
-    &.-active {
-      color: #36499b;
-      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
     }
   }
 
@@ -198,6 +184,7 @@
   .navigation__link:focus,
   .navigation__link.-active {
     color: #36499b;
+    box-shadow: inset 0 -4px;
     text-decoration: none;
   }
 

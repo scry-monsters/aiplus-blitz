@@ -35,14 +35,14 @@ const Testimonials = () => {
         </div>
       </div>
       <div className="testimons__btns">
-        <a href="/" className="testimons__btn">
+        <div className="testimons__btn">
           <CameraIcon />
           ВCЕ ВИДЕО ОТЗЫВЫ
-        </a>
-        <a href="/" className="testimons__btn">
+        </div>
+        <div className="testimons__btn">
           <Picture />
           ВCЕ ФОТО ОТЗЫВЫ
-        </a>
+        </div>
       </div>
       <style jsx>{styles}</style>
     </div>
